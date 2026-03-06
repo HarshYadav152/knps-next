@@ -162,12 +162,12 @@ const Footer: React.FC = () => {
                 <div>
                   <span className="text-sm font-medium block">Visit Us</span>
                   <a 
-                    href={`https://maps.google.com/?q=${encodeURIComponent(SCHOOL_DATA.contact.address)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-400 hover:text-gold-400 text-sm transition-colors"
+                  href="https://www.google.com/maps?q=27.443849,77.655257"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-gold-400 text-sm transition-colors"
                   >
-                    {SCHOOL_DATA.contact.address}
+                  {SCHOOL_DATA.contact.address}
                   </a>
                 </div>
               </div>
@@ -213,13 +213,13 @@ const Footer: React.FC = () => {
                 <iframe
                   title="School Location Map"
                   src={`${MAPS_URL}`}
-                  className="absolute inset-0 w-full h-full border-0"
+                  className="absolute inset-0 w-full h-full border-0 rounded-xl"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
               </div>
               <a 
-                href={`https://maps.google.com/?q=${encodeURIComponent(SCHOOL_DATA.contact.address)}`}
+                href={"https://www.google.com/maps?q=27.443849,77.655257"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"
@@ -260,25 +260,25 @@ const Footer: React.FC = () => {
               <span className="text-gold-500/70">Nurturing minds, building futures</span>
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="hover:text-gold-400 transition-colors flex items-center gap-1">
+              <a href="/policy" className="hover:text-gold-400 transition-colors flex items-center gap-1">
                 Privacy Policy
               </a>
-              <a href="#" className="hover:text-gold-400 transition-colors flex items-center gap-1">
+              <a href="/tos" className="hover:text-gold-400 transition-colors flex items-center gap-1">
                 Terms of Service
               </a>
-              <a href="#" className="hover:text-gold-400 transition-colors flex items-center gap-1">
+              <a href="#accessibility" className="hover:text-gold-400 transition-colors flex items-center gap-1">
                 Accessibility
               </a>
             </div>
           </div>
           
           {/* Accreditation Badges */}
-          <div className="flex justify-center md:justify-end items-center gap-4 mt-4 text-xs text-gray-600">
+          {/* <div className="flex justify-center md:justify-end items-center gap-4 mt-4 text-xs text-gray-600">
             <span>Accredited by</span>
             <span className="w-8 h-8 bg-royal-800 rounded-full flex items-center justify-center">🔰</span>
             <span className="w-8 h-8 bg-royal-800 rounded-full flex items-center justify-center">⭐</span>
             <span className="w-8 h-8 bg-royal-800 rounded-full flex items-center justify-center">🏆</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
