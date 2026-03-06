@@ -3,6 +3,7 @@ import {Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/common/Navbar";
 import Footer from "@/components/common/Footer";
+import WhatsAppButton from "@/components/common/WhatsAppButton";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -27,6 +28,12 @@ export default function RootLayout({
       >
         <Navbar/>
         {children}
+        <WhatsAppButton
+          phoneNumber="+91 8077640656"
+          message="Hi, I'm interested in admission at KN Public School."
+          position="bottom-right"
+          showPopup={true}
+        />
         <Footer/>
       </body>
     </html>
