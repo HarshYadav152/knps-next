@@ -1,200 +1,475 @@
 "use client"
-import React from 'react';
-import { motion } from 'framer-motion';
-import { CheckCircle, Download, FileText, Send, ArrowRight, Phone, Mail, Calendar } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { 
+  CheckCircle, Download, FileText, Send, ArrowRight, Phone, Mail, Calendar,
+  Users, BookOpen, Award, Clock, ChevronRight, Sparkles, Target,
+  HelpCircle, MessageCircle, CalendarCheck, GraduationCap, Shield,
+  TrendingUp, Heart, Globe, Zap
+} from 'lucide-react';
 import { SCHOOL_DATA } from './constants';
 
 const Admissions: React.FC = () => {
-    const steps = [
-        { icon: FileText, title: "Submit Inquiry", desc: "Fill out our online interest form to get started.", step: "01" },
-        { icon: Calendar, title: "Campus Tour", desc: "Schedule a visit to see our facilities in person.", link: '#campus', step: "02" },
-        { icon: Send, title: "Application", desc: "Complete the application and submit records.", step: "03" },
-        { icon: CheckCircle, title: "Enrollment", desc: "Welcome to the Excellence Academy family.", step: "04" }
-    ];
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+  
+  const steps = [
+    { 
+      icon: FileText, 
+      title: "Submit Inquiry", 
+      desc: "Fill out our online interest form to get started. We'll send you our information package within 24 hours.",
+      step: "01",
+      color: "from-blue-500 to-cyan-500",
+      details: "No commitment required. Just express your interest and we'll guide you through the process."
+    },
+    // { 
+    //   icon: Calendar, 
+    //   title: "Campus Tour", 
+    //   desc: "Schedule a visit to see our facilities in person and meet our faculty members.",
+    //   link: '#campus', 
+    //   step: "02",
+    //   color: "from-purple-500 to-pink-500",
+    //   details: "Experience our vibrant campus life, interact with current students, and ask questions."
+    // },
+    { 
+      icon: Send, 
+      title: "Application", 
+      desc: "Complete the application and submit previous academic records and recommendations.",
+      step: "03",
+      color: "from-amber-500 to-orange-500",
+      details: "Our admissions team will review your application holistically, considering all aspects."
+    },
+    { 
+      icon: CheckCircle, 
+      title: "Enrollment", 
+      desc: "Welcome to the school! Complete the enrollment forms and submit admission fee",
+      step: "04",
+      color: "from-emerald-500 to-teal-500",
+      details: "Receive your orientation package, meet your teachers, and prepare for the school year."
+    }
+  ];
 
-    const highlights = [
-        { label: "Application Deadline", value: "March 31, 2025" },
-        { label: "Acceptance Rate", value: "85%" },
-        { label: "Scholarships Available", value: "Yes" },
-    ];
+  const highlights = [
+    { 
+      label: "Application Deadline", 
+      value: "March 31, 2025",
+      subtext: "Early decision available",
+      icon: Clock,
+      color: "text-blue-600"
+    },
+    // { 
+    //   label: "Acceptance Rate", 
+    //   value: "85%",
+    //   subtext: "Selective but accessible",
+    //   icon: TrendingUp,
+    //   color: "text-green-600"
+    // },
+    // { 
+    //   label: "Scholarships", 
+    //   value: "35%",
+    //   subtext: "of students receive aid",
+    //   icon: Award,
+    //   color: "text-purple-600"
+    // },
+    { 
+      label: "Student-Teacher Ratio", 
+      value: "12:1",
+      subtext: "Personalized attention",
+      icon: Users,
+      color: "text-amber-600"
+    }
+  ];
+
+  const requirements = [
+    "Previous year academic report card",
+    // "Teacher recommendation letter",
+    "Entrance assessment",
+    "Student interview",
+    "Birth certificate copy",
+    // "Health records & immunization"
+  ];
+
+  const benefits = [
+    { icon: Shield, text: "Safe & Nurturing Environment" },
+    { icon: GraduationCap, text: "College Preparatory Curriculum" },
+    { icon: Heart, text: "Holistic Development Focus" },
+    // { icon: Globe, text: "Global Perspective" },
+    // { icon: Users, text: "Diverse Student Community" },
+    // { icon: Zap, text: "Advanced Learning Programs" }
+  ];
 
   return (
-    <section id="admissions" className="py-16 md:py-24 bg-gradient-to-b from-slate-400 to-white overflow-hidden relative">
-        {/* Background decorations */}
-        <div className="absolute top-0 right-0 w-72 h-72 bg-gold-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-royal-800/5 rounded-full blur-3xl"></div>
+    <section id="admissions" className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden relative">
+      {/* Enhanced Background Decorations */}
+      {/* <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-800/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-gold-500/3 to-royal-800/3 rounded-full blur-3xl"></div>
+      </div> */}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Left Content */}
-                <motion.div 
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 bg-gold-100 text-gold-700 px-6 py-2 rounded-full border border-gold-200 shadow-sm mb-6">
+            <Sparkles size={16} className="text-gold-600" />
+            <span className="font-semibold text-sm uppercase tracking-wider">Admissions Open 2025-26</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-royal-950 mb-6">
+            Begin Your Journey to{' '}
+            <span className="relative inline-block">
+              <span className="relative z-10 text-gold-600">KNPS</span>
+              <span className="absolute bottom-2 left-0 w-full h-3 bg-gold-200/50 -z-0 rounded-full"></span>
+            </span>
+          </h2>
+          
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            We welcome students of all backgrounds who strive for academic and personal excellence. 
+            Our admission process is designed to discover the unique potential in every student.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          
+          {/* Left Content - Main Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Why Choose Us Section */}
+            <div className="mb-12">
+              <h3 className="text-2xl font-serif font-bold text-royal-950 mb-6 flex items-center gap-2">
+                <Target className="text-gold-600" size={28} />
+                Why Choose Us?
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {benefits.map((benefit, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="order-2 lg:order-1"
-                >
-                    <span className="inline-flex items-center gap-2 text-gold-600 font-semibold tracking-wider uppercase text-sm bg-gold-50 px-4 py-1.5 rounded-full border border-gold-200">
-                        <FileText size={14} />
-                        Admissions Open 2025-26
+                    transition={{ delay: idx * 0.1 }}
+                    className="flex items-start gap-3 p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md hover:border-gold-200 transition-all duration-300 group"
+                  >
+                    <div className="p-2 bg-gold-50 rounded-lg group-hover:bg-gold-100 transition-colors">
+                      <benefit.icon size={18} className="text-gold-600" />
+                    </div>
+                    <span className="text-sm font-medium text-gray-700 group-hover:text-royal-900 transition-colors">
+                      {benefit.text}
                     </span>
-                    <h2 className="text-3xl md:text-4xl font-serif font-bold text-royal-950 mt-4 mb-4">
-                        Begin Your Journey to <span className="text-gold-600">Excellence</span>
-                    </h2>
-                    <div className="w-20 h-1 bg-gold-500 rounded-full mb-6"></div>
-                    <p className="text-gray-600 mb-8 text-lg leading-relaxed">
-                        We welcome students of all backgrounds who strive for academic and personal excellence. Our admission process is designed to get to know the whole student, not just their grades.
-                    </p>
-
-                    {/* Highlights Bar */}
-                    <div className="flex flex-wrap gap-4 mb-10 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                        {highlights.map((item, idx) => (
-                            <div key={idx} className="flex-1 min-w-[120px] text-center px-3 py-2 border-r last:border-r-0 border-gray-100">
-                                <div className="text-xl font-bold text-royal-800">{item.value}</div>
-                                <div className="text-xs text-gray-500 uppercase tracking-wide">{item.label}</div>
-                            </div>
-                        ))}
-                    </div>
-                    
-                    {/* Steps */}
-                    <div className="space-y-5">
-                        {steps.map((step, index) => (
-                            <motion.div 
-                                key={index} 
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: index * 0.1 }}
-                                className="flex gap-4 group relative"
-                            >
-                                {/* Connecting line */}
-                                {index < steps.length - 1 && (
-                                    <div className="absolute left-6 top-14 w-0.5 h-8 bg-gradient-to-b from-royal-200 to-transparent"></div>
-                                )}
-                                
-                                <div className="flex-shrink-0 relative">
-                                    <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white shadow-lg group-hover:shadow-gold-500/20 transition-all duration-300">
-                                        <step.icon size={20} />
-                                    </div>
-                                    {/* Step number badge */}
-                                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-gold-500 text-royal-950 text-[10px] font-bold rounded-full flex items-center justify-center">
-                                        {step.step}
-                                    </span>
-                                </div>
-                                
-                                <div className="flex-1 pt-1">
-                                    <a 
-                                        href={step.link || "#"} 
-                                        className="text-lg font-bold text-royal-950 group-hover:text-gold-600 transition-colors inline-flex items-center gap-1"
-                                    >
-                                        {step.title}
-                                        <ArrowRight size={14} className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                                    </a>
-                                    <p className="text-gray-500 text-sm mt-0.5">{step.desc}</p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                        <motion.button 
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="group px-8 py-4 bg-black text-white rounded-full font-semibold hover:shadow-xl hover:shadow-royal-900/20 transition-all duration-300 flex items-center justify-center gap-2"
-                        >
-                            Apply Online
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </motion.button>
-                        <motion.button 
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="px-8 py-4 bg-white text-royal-800 border-2 border-royal-200 rounded-full font-semibold hover:border-gold-500 hover:text-gold-600 transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
-                        >
-                            <Download size={18} /> Download Prospectus
-                        </motion.button>
-                    </div>
-
-                    {/* Contact info */}
-                    <div className="mt-8 flex flex-wrap gap-6 text-sm text-gray-500">
-                        <a href={`tel:${SCHOOL_DATA.contact.phone}`} className="inline-flex items-center gap-2 hover:text-gold-600 transition-colors">
-                            <Phone size={14} /> {SCHOOL_DATA.contact.phone}
-                        </a>
-                        <a href={`mailto:${SCHOOL_DATA.contact.email}`} className="inline-flex items-center gap-2 hover:text-gold-600 transition-colors">
-                            <Mail size={14} /> {SCHOOL_DATA.contact.email}
-                        </a>
-                    </div>
-                </motion.div>
-
-                {/* Right Image Section */}
-                <motion.div 
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="relative order-1 lg:order-2"
-                >
-                    {/* Decorative background shapes */}
-                    <div className="absolute top-8 left-8 w-full h-full bg-gradient-to-br from-gold-400/30 to-gold-500/10 rounded-3xl -z-10 transform rotate-3"></div>
-                    <div className="absolute top-4 left-4 w-full h-full border-2 border-royal-800/10 rounded-3xl -z-10 transform -rotate-2"></div>
-                    
-                    {/* Main Image */}
-                    <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
-                        <img 
-                            src="events/scout-2.jpg" 
-                            alt="Graduation day" 
-                            className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
-                        />
-                        {/* Overlay gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-royal-950/40 via-transparent to-transparent"></div>
-                    </div>
-                    
-                    {/* Testimonial Card */}
-                    {/* <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                        className="absolute -bottom-6 -left-4 md:-bottom-8 md:-left-8 bg-white p-2 md:p-6 rounded-2xl shadow-xl max-w-xs border-l-4 border-gold-500 hidden sm:block"
-                    >
-                        <div className="flex gap-1 mb-2">
-                            {[...Array(5)].map((_, i) => (
-                                <svg key={i} className="w-4 h-4 text-gold-500" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                            ))}
-                        </div>
-                        <p className="font-serif italic text-royal-950 text-sm md:text-base leading-relaxed">
-                            "The best decision we made for our child's future. The faculty is exceptional!"
-                        </p>
-                        <div className="flex items-center gap-3 mt-3 pt-3 border-t border-gray-100">
-                            <div className="w-10 h-10 bg-gradient-to-br from-royal-800 to-royal-950 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                                A
-                            </div>
-                            <div>
-                                <p className="text-sm font-bold text-royal-950">The Anderson Family</p>
-                                <p className="text-xs text-gray-500">Parent, Class of 2024</p>
-                            </div>
-                        </div>
-                    </motion.div> */}
-
-                    {/* Stats floating card */}
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        className="absolute -top-4 -right-4 md:-top-6 md:-right-6 bg-gradient-to-br from-royal-800 to-royal-950 text-white p-4 md:p-5 rounded-2xl shadow-xl hidden sm:block"
-                    >
-                        <div className="text-center">
-                            <p className="font-bold text-2xl md:text-3xl text-gold-400">500+</p>
-                            <p className="text-[10px] md:text-xs uppercase tracking-wider text-white/80">Students Enrolled</p>
-                            <p className="text-[10px] md:text-xs text-white/60">This Year</p>
-                        </div>
-                    </motion.div>
-                </motion.div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
+
+            {/* Highlights Grid */}
+            <div className="mb-12">
+              <h3 className="text-2xl font-serif font-bold text-royal-950 mb-6">Quick Facts</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {highlights.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 group"
+                    >
+                      <div className={`flex items-center gap-2 mb-2 ${item.color}`}>
+                        <Icon size={20} />
+                        <span className="text-2xl font-bold text-royal-950">{item.value}</span>
+                      </div>
+                      <div className="text-sm font-medium text-gray-600">{item.label}</div>
+                      <div className="text-xs text-gray-400 mt-1">{item.subtext}</div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Admission Steps with Interactive Cards */}
+            <div className="space-y-4">
+              <h3 className="text-2xl font-serif font-bold text-royal-950 mb-6 flex items-center gap-2">
+                <GraduationCap className="text-gold-600" size={28} />
+                Admission Process
+              </h3>
+              
+              {steps.map((step, index) => {
+                const Icon = step.icon;
+                const isActive = activeStep === index;
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    onHoverStart={() => setActiveStep(index)}
+                    onHoverEnd={() => setActiveStep(null)}
+                    className={`relative group cursor-pointer transition-all duration-300 ${
+                      isActive ? 'scale-[1.02]' : ''
+                    }`}
+                  >
+                    {/* Connecting line */}
+                    {index < steps.length - 1 && (
+                      <div className="absolute left-7 top-14 w-0.5 h-12 bg-gradient-to-b from-royal-200 to-transparent"></div>
+                    )}
+                    
+                    <div className="flex gap-5 p-5 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300">
+                      {/* Icon with gradient background */}
+                      <div className="relative">
+                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                          <Icon size={24} />
+                        </div>
+                        {/* Step number badge */}
+                        <span className="absolute -top-2 -right-2 w-6 h-6 bg-royal-900 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-white">
+                          {step.step}
+                        </span>
+                      </div>
+                      
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h4 className="text-lg font-bold text-royal-950 group-hover:text-gold-600 transition-colors">
+                            {step.title}
+                          </h4>
+                          <ChevronRight size={16} className={`text-gold-500 transition-all duration-300 ${
+                            isActive ? 'translate-x-1 opacity-100' : 'opacity-0'
+                          }`} />
+                        </div>
+                        <p className="text-gray-600 text-sm mb-2">{step.desc}</p>
+                        
+                        {/* Expandable details */}
+                        {/* <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ 
+                            height: isActive ? 'auto' : 0,
+                            opacity: isActive ? 1 : 0
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg border border-gray-100 mt-2">
+                            {step.details}
+                          </p>
+                        </motion.div> */}
+                        
+                        {/* {step.link && (
+                          <a 
+                            href={step.link}
+                            className="inline-flex items-center gap-1 text-sm text-gold-600 hover:text-gold-700 font-medium mt-2 group/link"
+                          >
+                            Schedule a tournnnnnnnnnnnnnnnnn
+                            <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                          </a>
+                        )} */}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex-1 px-8 py-5 bg-gradient-to-r from-royal-800 to-royal-950 text-white rounded-xl font-semibold hover:shadow-xl hover:shadow-royal-900/20 transition-all duration-300 flex items-center justify-center gap-3 text-lg"
+              >
+                <span>Apply Online</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group flex-1 px-8 py-5 bg-white text-royal-800 border-2 border-royal-200 rounded-xl font-semibold hover:border-gold-500 hover:text-gold-600 hover:bg-gold-50 transition-all duration-300 flex items-center justify-center gap-3 text-lg shadow-sm"
+              >
+                <Download size={20} className="group-hover:scale-110 transition-transform" />
+                <span>Download Prospectus</span>
+              </motion.button>
+            </div>
+
+            {/* Contact Info with quick actions */}
+            <div className="mt-8 grid grid-cols-2 gap-4">
+              <a 
+                href={`tel:${SCHOOL_DATA.contact.phone}`}
+                className="flex items-center gap-3 p-2 bg-white rounded-xl border border-gray-100 hover:border-gold-200 hover:shadow-md transition-all group"
+              >
+                <div className="bg-gold-50 rounded-lg group-hover:bg-gold-100 transition-colors">
+                  <Phone size={18} className="text-gold-600" />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500">Call us</div>
+                  <div className="text-sm font-semibold text-royal-900">{SCHOOL_DATA.contact.phone}</div>
+                </div>
+              </a>
+              
+              <a 
+                href={`mailto:${SCHOOL_DATA.contact.email}`}
+                className="flex items-center gap-3 p-2 bg-white rounded-xl border border-gray-100 hover:border-gold-200 hover:shadow-md transition-all group"
+              >
+                <div className="bg-gold-50 rounded-lg group-hover:bg-gold-100 transition-colors">
+                  <Mail size={18} className="text-gold-600" />
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500">Email us</div>
+                  <div className="text-sm font-semibold text-royal-900 truncate">{SCHOOL_DATA.contact.email}</div>
+                </div>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Column - Image and Additional Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            {/* Main Image with Overlay Stats */}
+            <div className="relative group">
+              {/* Decorative frames */}
+              {/* <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-gold-400 to-gold-600 rounded-3xl opacity-20 group-hover:opacity-30 transition-opacity"></div> */}
+              {/* <div className="absolute -top-2 -left-2 w-full h-full border-2 border-royal-800/20 rounded-3xl"></div> */}
+              
+              {/* Main Image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white aspect-[4/3]">
+                <img
+                  src="events/scout-2.jpg"
+                  alt="Students celebrating graduation"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-royal-950/60 via-transparent to-transparent"></div>
+                
+                {/* Floating stats card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                  className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl"
+                >
+                  <div className="grid grid-cols-2 gap-2 text-center">
+                    <div>
+                      <div className="text-xl font-bold text-royal-950">TBU</div>
+                      <div className="text-xs text-gray-600">Students</div>
+                    </div>
+                    {/* <div className="border-x border-gray-200">
+                      <div className="text-xl font-bold text-royal-950">98%</div>
+                      <div className="text-xs text-gray-600">Graduation</div>
+                    </div> */}
+                    <div>
+                      <div className="text-xl font-bold text-royal-950">TBU</div>
+                      <div className="text-xs text-gray-600">Class Size</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Requirements Card */}
+            <div className="bg-gradient-to-br from-royal-900 to-royal-950 rounded-2xl p-6 text-white shadow-xl">
+              <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                <FileText size={20} className="text-gold-400" />
+                Admission Requirements (TBU)
+              </h3>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {requirements.map((req, idx) => (
+                  <div key={idx} className="flex items-start gap-2">
+                    <CheckCircle size={16} className="text-gold-400 flex-shrink-0 mt-1" />
+                    <span className="text-sm text-gray-200">{req}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 pt-4 border-t border-royal-700">(TBU)
+                <p className="text-sm text-gray-300 flex items-center gap-2">
+                  <HelpCircle size={16} className="text-gold-400" />
+                  Need help with requirements? Our admissions team is here to assist.
+                </p>
+                <button className="mt-3 text-gold-400 hover:text-gold-300 text-sm font-medium flex items-center gap-1 group">
+                  Schedule a consultation
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+
+            {/* Upcoming Events Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+              <h3 className="text-xl font-bold text-royal-950 mb-4 flex items-center gap-2">
+                <CalendarCheck size={20} className="text-gold-600" />
+                Upcoming Admissions Events (TBU)
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex gap-4 p-3 bg-gray-50 rounded-xl hover:bg-gold-50 transition-colors">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-royal-900">15</div>
+                    <div className="text-xs text-gray-500">MAR</div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-royal-900">Open House & Campus Tour</h4>
+                    <p className="text-sm text-gray-500">10:00 AM - 1:00 PM</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4 p-3 bg-gray-50 rounded-xl hover:bg-gold-50 transition-colors">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-royal-900">22</div>
+                    <div className="text-xs text-gray-500">MAR</div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-royal-900">Virtual Information Session</h4>
+                    <p className="text-sm text-gray-500">7:00 PM - 8:30 PM</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-4 p-3 bg-gray-50 rounded-xl hover:bg-gold-50 transition-colors">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-royal-900">05</div>
+                    <div className="text-xs text-gray-500">APR</div>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-royal-900">Financial Aid Workshop</h4>
+                    <p className="text-sm text-gray-500">6:00 PM - 7:30 PM</p>
+                  </div>
+                </div>
+              </div>
+              
+              <button className="w-full mt-4 py-3 text-gold-600 hover:text-gold-700 font-medium flex items-center justify-center gap-2 border border-gold-200 rounded-xl hover:bg-gold-50 transition-colors">
+                View All Events (TBU)
+                <ArrowRight size={16} />
+              </button>
+            </div>
+
+            {/* Quick Chat Button */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-royal-950 rounded-xl font-semibold flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transition-all"
+            >
+              <MessageCircle size={20} />
+              Chat with Admissions Team (TBA)
+            </motion.button>
+          </motion.div>
         </div>
+      </div>
     </section>
   );
 };
