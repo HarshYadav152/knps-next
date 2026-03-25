@@ -99,16 +99,6 @@ export const metadata: Metadata = {
     ],
   },
   
-  // Verification for search consoles
-  // verification: {
-  //   google: "your-google-site-verification-code",
-  //   yandex: "your-yandex-verification-code",
-  //   yahoo: "your-yahoo-verification-code",
-  //   other: {
-  //     "facebook-domain-verification": ["your-facebook-domain-verification-code"],
-  //   },
-  // },
-  
   // Canonical URL
   alternates: {
     canonical: "https://knps.vercel.app",
@@ -137,34 +127,6 @@ export const metadata: Metadata = {
   applicationName: "KN Public School",
   generator: "Next.js",
   publisher: "KN Public School",
-  
-  // Format detection
-  // formatDetection: {
-  //   email: false,
-  //   address: false,
-  //   telephone: false,
-  // },
-  
-  // // Apple web app
-  // appleWebApp: {
-  //   title: "KN Public School",
-  //   statusBarStyle: "black-translucent",
-  //   capable: true,
-  // },
-  
-  // App links
-  // appLinks: {
-  //   android: {
-  //     app_name: "KN Public School",
-  //     package: "com.knps.app",
-  //     url: "https://play.google.com/store/apps/details?id=com.knps.app",
-  //   },
-  //   iphone: {
-  //     app_name: "KN Public School",
-  //     app_store_id: "your-app-store-id",
-  //     url: "https://apps.apple.com/app/idyour-app-store-id",
-  //   },
-  // },
 };
 
 // Viewport configuration for responsive design
@@ -250,14 +212,6 @@ export default function RootLayout({
             description: "Grades 6-8",
           },
         },
-        // {
-        //   "@type": "Offer",
-        //   itemOffered: {
-        //     "@type": "EducationalOccupationalProgram",
-        //     name: "High School",
-        //     description: "Grades -12",
-        //   },
-        // },
       ],
     },
   };
@@ -350,20 +304,6 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-
-        {/* Google Analytics / Tag Manager (optional) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=GA-MEASUREMENT-ID"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'GA-MEASUREMENT-ID');
-          `}
-        </Script>
 
         <Navbar />
         
