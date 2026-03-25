@@ -12,11 +12,11 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Home', href: '/#home' },
   { label: 'About', href: '/#about' },
   { label: 'Students', href: '/#students' },
-  { label: 'Events', href: '#events' },
-  { label: 'Teachers', href: '#teachers' },
-  { label: 'Admissions', href: '#admissions' },
-  { label: 'Campus', href: '#campus' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Events', href: '/#events' },
+  { label: 'Teachers', href: '/#teachers' },
+  { label: 'Admissions', href: '/#admissions' },
+  { label: 'Campus', href: '/#campus' },
+  { label: 'Contact', href: '/#contact' },
 ];
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
