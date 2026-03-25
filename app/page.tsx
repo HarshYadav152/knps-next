@@ -19,7 +19,7 @@ export default function Home() {
       {/* <SectionDivider variant="geometric"/> */}
       <Students />
       {/* <SectionDivider variant="geometric"/> */}
-      <Events />
+      {/* <Events /> */}
       {/* <SectionDivider variant="elegant"/> */}
       <Faculty />
       {/* <SectionDivider variant="minimal"/> */}
