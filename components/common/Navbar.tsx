@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Admission Banner */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: bannerVisible ? 1 : 0, y: bannerVisible ? 0 : -20 }}
         transition={{ duration: 0.3 }}
@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
         <span className="text-royal-950 text-sm md:text-base font-semibold tracking-wide">
           🎓 Admissions Open for 2025-2026 | Apply Now!
         </span>
-      </motion.div>
+      </motion.div> */}
 
       {/* Navbar */}
       <nav
